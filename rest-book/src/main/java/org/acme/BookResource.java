@@ -1,5 +1,10 @@
 package org.acme;
 
+
+
+import org.jboss.logging.Logger;
+
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -12,25 +17,27 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
 
+    @Inject
+    BookRepository repository;
+    @Inject
+    Logger logger;
+
     @GET
     public List<Book> getAllBooks() {
-        return List.of(
-                new Book(1, "Understanding Quarkus", "Antonio", 2020, "IT"),
-                new Book(2, "Understanding Quarkus 2", "Antonio", 2020, "IT")
-        );
+        logger.info("Returns all the books");
+        return repository.getAllBooks();
     }
 
     @GET
     @Path("/count")
     @Produces(MediaType.TEXT_PLAIN)
     public int countAllBooks() {
-        return getAllBooks().size();
+        return repository.countAllBooks();
     }
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
      public Optional<Book> getBook(@PathParam("id") int id) {
-        return getAllBooks().stream()
-                .filter(book -> book.id == id).findFirst();
+        return repository.getBook(id);
      }
 }
