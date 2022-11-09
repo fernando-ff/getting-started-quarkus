@@ -50,7 +50,6 @@ If you want to learn more about building native executables, please consult http
 ## Related Guides
 
 - RESTEasy Classic JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON-B serialization support for RESTEasy Classic
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing JAX-RS and more
 
 ## Provided Code
 
